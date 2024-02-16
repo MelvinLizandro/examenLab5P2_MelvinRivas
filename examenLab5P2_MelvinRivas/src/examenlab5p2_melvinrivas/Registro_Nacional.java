@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -159,6 +160,7 @@ public class Registro_Nacional extends javax.swing.JFrame {
         //</editor-fold>
 
         Scanner input = new Scanner(System.in);
+        Random random = new Random();
         ArrayList <Usuarios> user = new ArrayList();
         
         /* Create and display the form */
@@ -178,9 +180,8 @@ public class Registro_Nacional extends javax.swing.JFrame {
         if (opcrearusuario == 9) {
             
             System.out.println("-----Bienvenido al creador de Usuario-----");
-            System.out.println("1. Civiles");
-            System.out.println("2. empleados");
-            System.out.println("3. Salir");
+            System.out.println("1. Crear");
+            System.out.println("2. Salir");
             int opcrearusuario2 = input.nextInt();
             switch (opcrearusuario2) {
                 case 1: {
@@ -224,26 +225,34 @@ public class Registro_Nacional extends javax.swing.JFrame {
                     }
                      }while(opproveniente != 1 && opproveniente !=2 && opproveniente !=3 );
                      
-                    String identidad;
+                    String identidad1= "";
                      if (departamento.equalsIgnoreCase("Fransisco")) {
-                        identidad = "01";
+                         int dado = random.nextInt(1,28);
+                        identidad1 = "01"+dado;
                     }else  if (departamento.equalsIgnoreCase("Cortez")) {
-                        identidad = "02";
+                        int dado = random.nextInt(1,12);
+                        identidad1 = "02"+dado;
                     }else  if (departamento.equalsIgnoreCase("Comayaguela")) {
-                        identidad = "02";
+                        int dado = random.nextInt(1,21);
+                        identidad1 = "02"+dado;
                     }
+                     int identidadint = fecha3.getYear();
+                     int identidad3 = random.nextInt(1,9999);
+                     
+                     String identidad_final = identidad1+identidadint;
+                     identidad_final =identidad_final + identidad3;
+                     
+                     System.out.println("-----Usuario-----");
+                    System.out.println("1. Civiles");
+                    System.out.println("2. Empleado");
+                     
                     Civiles civil = new Civiles();
                     break;
                 }
                 case 2: {
                     
                     break;
-                }
-                case 3: {
-                    
-                    break;
-                }
-                
+                }          
                 default: {
                     System.out.println("-----Caracter Invalido-----");
                     break;
