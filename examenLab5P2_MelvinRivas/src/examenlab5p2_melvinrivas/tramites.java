@@ -20,7 +20,7 @@ public class tramites extends Civiles {
 
     }
 
-    public tramites(String nombre_tramites, String descripcion, Date fecha_hecha, String nombre, String apellido, int contraseña, Date nacimiento, String sexo, String departamento, long identidad) {
+    public tramites(String nombre_tramites, String descripcion, Date fecha_hecha, String nombre, String apellido, int contraseña, Date nacimiento, String sexo, String departamento, String identidad) {
         super(nombre, apellido, contraseña, nacimiento, sexo, departamento, identidad);
         this.nombre_tramites = nombre_tramites;
         this.descripcion = descripcion;

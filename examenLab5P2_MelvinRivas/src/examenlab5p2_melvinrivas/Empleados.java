@@ -53,7 +53,8 @@ public class Empleados extends Usuarios{
 
     @Override
     public String toString() {
-        return "Empleados{" + "carrera=" + carrera + ", puesto_laboral=" + puesto_laboral + ", a\u00f1os_laborados=" + años_laborados + '}';
+        
+        return super.toString() + "Empleados{" + "carrera=" + carrera + ", puesto_laboral=" + puesto_laboral + ", a\u00f1os_laborados=" + años_laborados + '}';
     }
      
     

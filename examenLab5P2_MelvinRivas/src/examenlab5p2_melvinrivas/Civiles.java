@@ -32,11 +32,7 @@ public class Civiles extends Usuarios {
         this.tramites = tramites;
     }
 
-    @Override
-    public String toString() {
-        return "Civiles{" + "tramites=" + tramites + '}';
-    }
-    
+
     
     
 }

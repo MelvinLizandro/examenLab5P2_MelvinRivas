@@ -16,13 +16,15 @@ import java.util.Scanner;
  * @author l3306
  */
 public class Registro_Nacional extends javax.swing.JFrame {
-
     /**
      * Creates new form Registro_Nacional
      */
+    
     public Registro_Nacional() {
         initComponents();
+        
     }
+    static ArrayList <Usuarios> user = new ArrayList();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,6 +35,7 @@ public class Registro_Nacional extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        empleado = new javax.swing.JPanel();
         log = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -40,8 +43,20 @@ public class Registro_Nacional extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         textcontraseña = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        advertencia = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout empleadoLayout = new javax.swing.GroupLayout(empleado);
+        empleado.setLayout(empleadoLayout);
+        empleadoLayout.setHorizontalGroup(
+            empleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 553, Short.MAX_VALUE)
+        );
+        empleadoLayout.setVerticalGroup(
+            empleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 386, Short.MAX_VALUE)
+        );
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 204));
@@ -63,6 +78,13 @@ public class Registro_Nacional extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        advertencia.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout logLayout = new javax.swing.GroupLayout(log);
         log.setLayout(logLayout);
@@ -77,6 +99,7 @@ public class Registro_Nacional extends javax.swing.JFrame {
                         .addGroup(logLayout.createSequentialGroup()
                             .addGap(54, 54, 54)
                             .addGroup(logLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(advertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(textcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(logLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -84,30 +107,32 @@ public class Registro_Nacional extends javax.swing.JFrame {
                     .addGroup(logLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(textnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65))
         );
         logLayout.setVerticalGroup(
             logLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(logLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(28, 28, 28)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(49, 49, 49)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(textnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(logLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(logLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, logLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)))
-                .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(textcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(advertencia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -115,22 +140,41 @@ public class Registro_Nacional extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(log, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(empleado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(log, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(empleado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        
-        if (rootPaneCheckingEnabled) {
+        if (textnombre.getText().equals("") && textcontraseña.getText().equals("")) {
+            advertencia.setText("Los campos no pueden estar vacios");
+        }
+        for (int i = 0; i < user.size(); i++) {
             
+            String nom = textnombre.getText();
+            int contra = Integer.parseInt( textcontraseña.getText());
+            
+            if (user.get(i).getNombre().contains(nom) && user.get(i).getApellido().contains(nom)) {
+                if (user.get(i).getContraseña() == contra) {
+                    log.setVisible(false);
+                    empleado.setVisible(true);
+                }
+            }
         }
         
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,7 +205,7 @@ public class Registro_Nacional extends javax.swing.JFrame {
 
         Scanner input = new Scanner(System.in);
         Random random = new Random();
-        ArrayList <Usuarios> user = new ArrayList();
+        
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -171,8 +215,10 @@ public class Registro_Nacional extends javax.swing.JFrame {
         }
        );
         
+            
+            
         // Fila 3 silla 3
-        
+        while(true){
         System.out.println("Ingrese 9 para crear un nuevo usario: ");
         int  opcrearusuario = input.nextInt();
         
@@ -188,6 +234,7 @@ public class Registro_Nacional extends javax.swing.JFrame {
                     
                     System.out.print("Ingrese su nombre: ");
                     String nom = input.nextLine();
+                    nom = input.nextLine();
                     
                     System.out.print("Ingrese su apellido: ");
                     String apellido = input.nextLine();
@@ -195,8 +242,9 @@ public class Registro_Nacional extends javax.swing.JFrame {
                     System.out.print("Ingrese su contraseña: ");
                     int contra = input.nextInt();
                     
-                    System.out.println("Ingrese su fecha de nacimiento dd/MM/yyyy: ");
+                    System.out.print("Ingrese su fecha de nacimiento dd/MM/yyyy: ");
                     String fecha = input.nextLine();
+                    fecha = input.nextLine();
                     SimpleDateFormat fecha2 = new SimpleDateFormat("dd/MM/yyyy");
                     Date fecha3 = fecha2.parse(fecha);
                     
@@ -245,12 +293,35 @@ public class Registro_Nacional extends javax.swing.JFrame {
                      System.out.println("-----Usuario-----");
                     System.out.println("1. Civiles");
                     System.out.println("2. Empleado");
+                    int opelector = input.nextInt();
+                    if (opelector == 1) {
+                        Civiles civil = new Civiles(nom,apellido,contra,
+                                fecha3,sexo,departamento,identidad_final);
+                        user.add(civil);
+                    }else if (opelector == 2) {
+                        
+                        System.out.print("Ingrese su carrera: ");
+                        String carrera = input.nextLine();
+                        carrera = input.nextLine();
+                        System.out.print("Ingrese su puesto laboral: ");
+                        String puesto = input.nextLine();
+                        System.out.print("Ingrese sus años junto a la empreza: ");
+                        int años = input.nextInt();
+                        Empleados empleado = new Empleados(carrera,puesto,años, nom,
+                                apellido,contra,fecha3,sexo,departamento,identidad_final);
+                        user.add(empleado);
+                       
+                    }
+                    
+                    
+                    for (int i = 0; i < user.size(); i++) {
+                        
+                    }
                      
-                    Civiles civil = new Civiles();
                     break;
                 }
                 case 2: {
-                    
+                    System.out.println("Regresando.....");
                     break;
                 }          
                 default: {
@@ -261,10 +332,12 @@ public class Registro_Nacional extends javax.swing.JFrame {
             
             
         }
-        
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel advertencia;
+    private javax.swing.JPanel empleado;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
