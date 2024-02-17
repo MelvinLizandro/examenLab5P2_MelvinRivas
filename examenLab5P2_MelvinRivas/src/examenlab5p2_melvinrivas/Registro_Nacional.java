@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,10 +23,24 @@ public class Registro_Nacional extends javax.swing.JFrame {
     /**
      * Creates new form Registro_Nacional
      */
-    static ArrayList <Usuarios> user = new ArrayList();
-    public Registro_Nacional() {
+    static ArrayList<Usuarios> user = new ArrayList();
+    static int iniciada;
+    public Registro_Nacional() throws ParseException {
         initComponents();
         logaparecer();
+
+        String fecha = "12/12/2000";
+        SimpleDateFormat fecha2 = new SimpleDateFormat("dd/MM/yyyy");
+        Date fecha3 = fecha2.parse(fecha);
+        Civiles civ1 = new Civiles("Melvin", "Rivas", 123, fecha3, "masculino",
+                "Tegucigalpa", "2020812120101");
+        Civiles civ2 = new Civiles("Tania", "Monserrat", 321, fecha3, "femenino",
+                "Tegucigalpa", "0813123817887");
+        Empleados emple1 = new Empleados("Ingenieria en sistemas", "jefe", 12, "Laura", "Giron", 123456, fecha3, "Femenino",
+                "Tegucigalpa", "2020812120101");
+        user.add(civ2);
+        user.add(civ1);
+        user.add(emple1);
 
         DefaultTableModel t = (DefaultTableModel) uno3.getModel();
         for (int i = 0; i < user.size(); i++) {
@@ -33,7 +49,16 @@ public class Registro_Nacional extends javax.swing.JFrame {
                 t.addRow(k);
             }
         }
-    }
+
+ 
+        DefaultTableModel o = (DefaultTableModel) tres7.getModel();
+        
+                Object[] k = {user.get(iniciada+1).nombre, user.get(iniciada+1).identidad, user.get(iniciada+1).nacimiento};
+                o.addRow(k);
+            }
+        
+        
+    
   
    
     
@@ -48,15 +73,18 @@ public class Registro_Nacional extends javax.swing.JFrame {
     private void initComponents() {
 
         Civil = new javax.swing.JPanel();
-        tres1 = new javax.swing.JLabel();
+        tres3 = new javax.swing.JLabel();
         tres2 = new javax.swing.JButton();
-        tres3 = new javax.swing.JTabbedPane();
+        tres1 = new javax.swing.JTabbedPane();
         tres4 = new javax.swing.JPanel();
+        tres6 = new javax.swing.JScrollPane();
+        tres7 = new javax.swing.JTable();
+        tres8 = new javax.swing.JLabel();
         tres5 = new javax.swing.JPanel();
         empleado = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        salida = new javax.swing.JButton();
-        pagina = new javax.swing.JTabbedPane();
+        uno9 = new javax.swing.JLabel();
+        uno10 = new javax.swing.JButton();
+        uno11 = new javax.swing.JTabbedPane();
         uno1 = new javax.swing.JPanel();
         uno2 = new javax.swing.JScrollPane();
         uno3 = new javax.swing.JTable();
@@ -76,9 +104,9 @@ public class Registro_Nacional extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tres1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        tres1.setForeground(new java.awt.Color(0, 0, 0));
-        tres1.setText("Bienvenido: ");
+        tres3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        tres3.setForeground(new java.awt.Color(0, 0, 0));
+        tres3.setText("Bienvenido: ");
 
         tres2.setBackground(new java.awt.Color(0, 0, 0));
         tres2.setForeground(new java.awt.Color(255, 0, 0));
@@ -88,19 +116,54 @@ public class Registro_Nacional extends javax.swing.JFrame {
                 tres2MouseClicked(evt);
             }
         });
+        tres2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tres2ActionPerformed(evt);
+            }
+        });
+
+        tres7.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "No de identidad", "fecha de nacimiento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tres6.setViewportView(tres7);
+
+        tres8.setText("Informacion personal");
 
         javax.swing.GroupLayout tres4Layout = new javax.swing.GroupLayout(tres4);
         tres4.setLayout(tres4Layout);
         tres4Layout.setHorizontalGroup(
             tres4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 464, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tres4Layout.createSequentialGroup()
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addGroup(tres4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tres8)
+                    .addComponent(tres6, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57))
         );
         tres4Layout.setVerticalGroup(
             tres4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGroup(tres4Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(tres8)
+                .addGap(18, 18, 18)
+                .addComponent(tres6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(248, Short.MAX_VALUE))
         );
 
-        tres3.addTab("Informacion personal", tres4);
+        tres1.addTab("Informacion personal", tres4);
 
         javax.swing.GroupLayout tres5Layout = new javax.swing.GroupLayout(tres5);
         tres5.setLayout(tres5Layout);
@@ -113,65 +176,73 @@ public class Registro_Nacional extends javax.swing.JFrame {
             .addGap(0, 358, Short.MAX_VALUE)
         );
 
-        tres3.addTab("Gestion de tramites", tres5);
+        tres1.addTab("Gestion de tramites", tres5);
 
         javax.swing.GroupLayout CivilLayout = new javax.swing.GroupLayout(Civil);
         Civil.setLayout(CivilLayout);
         CivilLayout.setHorizontalGroup(
             CivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CivilLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(tres1)
+                .addGap(46, 46, 46)
+                .addComponent(tres3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(tres2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
             .addGroup(CivilLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(tres3, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tres1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         CivilLayout.setVerticalGroup(
             CivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CivilLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(CivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tres1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tres2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addComponent(tres3, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(CivilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tres2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tres3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addComponent(tres1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         empleado.setPreferredSize(new java.awt.Dimension(507, 266));
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Bienvenido: ");
+        uno9.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        uno9.setForeground(new java.awt.Color(0, 0, 0));
+        uno9.setText("Bienvenido: ");
 
-        salida.setBackground(new java.awt.Color(0, 0, 0));
-        salida.setForeground(new java.awt.Color(255, 0, 0));
-        salida.setText("Cerrar");
-        salida.addMouseListener(new java.awt.event.MouseAdapter() {
+        uno10.setBackground(new java.awt.Color(0, 0, 0));
+        uno10.setForeground(new java.awt.Color(255, 0, 0));
+        uno10.setText("Cerrar");
+        uno10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                salidaMouseClicked(evt);
+                uno10MouseClicked(evt);
             }
         });
 
-        pagina.setPreferredSize(new java.awt.Dimension(507, 266));
+        uno11.setPreferredSize(new java.awt.Dimension(507, 266));
 
         uno1.setPreferredSize(new java.awt.Dimension(507, 266));
 
         uno3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Identidad", "Nacimiento"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         uno2.setViewportView(uno3);
 
         uno4.setText("Informacion de los civiles: ");
@@ -184,9 +255,17 @@ public class Registro_Nacional extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre del tramite", "Descripcion", "fecha", "Identidad"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         uno5.setViewportView(uno6);
 
         uno7.setText("Tramites:");
@@ -219,7 +298,7 @@ public class Registro_Nacional extends javax.swing.JFrame {
                 .addGap(28, 28, 28))
         );
 
-        pagina.addTab("Informacion civiles", uno1);
+        uno11.addTab("Informacion civiles", uno1);
 
         javax.swing.GroupLayout uno8Layout = new javax.swing.GroupLayout(uno8);
         uno8.setLayout(uno8Layout);
@@ -232,7 +311,7 @@ public class Registro_Nacional extends javax.swing.JFrame {
             .addGap(0, 329, Short.MAX_VALUE)
         );
 
-        pagina.addTab("Modificacion civiles", uno8);
+        uno11.addTab("Modificacion civiles", uno8);
 
         javax.swing.GroupLayout empleadoLayout = new javax.swing.GroupLayout(empleado);
         empleado.setLayout(empleadoLayout);
@@ -240,13 +319,13 @@ public class Registro_Nacional extends javax.swing.JFrame {
             empleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, empleadoLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jLabel4)
+                .addComponent(uno9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(salida, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(uno10, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
             .addGroup(empleadoLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(pagina, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(uno11, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         empleadoLayout.setVerticalGroup(
@@ -254,10 +333,10 @@ public class Registro_Nacional extends javax.swing.JFrame {
             .addGroup(empleadoLayout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addGroup(empleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salida, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(uno9, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uno10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addComponent(pagina, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
+                .addComponent(uno11, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
         );
 
         dos1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -374,10 +453,12 @@ public class Registro_Nacional extends javax.swing.JFrame {
                     log.setVisible(false);
                     textcontraseña.setText("");
                     textnombre.setText("");
+                    iniciada = i;
                     if(user.get(i) instanceof Empleados){
                     empleadoaparecer();
-                    }else if (user.get(i) instanceof Civiles) {
-                        Civil.setVisible(true);
+                    } 
+                    if (user.get(i) instanceof Civiles) {
+                        civilesaparecer();
                     }
                 }
             }
@@ -389,16 +470,20 @@ public class Registro_Nacional extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dos4ActionPerformed
 
-    private void salidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseClicked
+    private void uno10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uno10MouseClicked
         // TODO add your handling code here:
         
         
         
-    }//GEN-LAST:event_salidaMouseClicked
+    }//GEN-LAST:event_uno10MouseClicked
 
     private void tres2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tres2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tres2MouseClicked
+
+    private void tres2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tres2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tres2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -429,12 +514,18 @@ public class Registro_Nacional extends javax.swing.JFrame {
 
         Scanner input = new Scanner(System.in);
         Random random = new Random();
-        
-        
+       
+    
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Registro_Nacional().setVisible(true);
+               
+                try {
+                    new Registro_Nacional().setVisible(true);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Registro_Nacional.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         }
        );
@@ -444,10 +535,16 @@ public class Registro_Nacional extends javax.swing.JFrame {
         // Fila 3 silla 3
         while(true){
         System.out.println("Ingrese 9 para crear un nuevo usario: ");
+            System.out.println("Ingrese 8 para listar usuarios");
         int  opcrearusuario = input.nextInt();
         
-        
-        if (opcrearusuario == 9) {
+            if (opcrearusuario == 8) {
+                
+                for (int i = 0; i < user.size(); i++) {
+                    System.out.println(user.get(i));
+                }
+                
+            }else if (opcrearusuario == 9) {
             
             System.out.println("-----Bienvenido al creador de Usuario-----");
             System.out.println("1. Crear");
@@ -536,11 +633,7 @@ public class Registro_Nacional extends javax.swing.JFrame {
                         user.add(empleado);
                        
                     }
-                    
-                    
-                    for (int i = 0; i < user.size(); i++) {
-                        
-                    }
+                   
                      
                     break;
                 }
@@ -560,49 +653,103 @@ public class Registro_Nacional extends javax.swing.JFrame {
     }
     
     public void empleadoaparecer() {
-        pagina.setVisible(true);
+     
         uno1.setVisible(true);
         uno2.setVisible(true);
         uno3.setVisible(true);
         uno4.setVisible(true);
         uno5.setVisible(true);
         uno6.setVisible(true);
+        uno7.setVisible(true);
         uno8.setVisible(true);
+        uno9.setVisible(true);
+        uno10.setVisible(true);
+        uno11.setVisible(true);
         dos1.setVisible(false);
         dos2.setVisible(false);
         dos3.setVisible(false);
         dos4.setVisible(false);
+        advertencia.setVisible(false);
+        textnombre.setVisible(false);
+        textcontraseña.setVisible(false);
         tres1.setVisible(false);
         tres2.setVisible(false);
         tres3.setVisible(false);
         tres4.setVisible(false);
         tres5.setVisible(false);
-              textnombre.setVisible(false);
-        textcontraseña.setVisible(false);
-        salida.setVisible(true);
-} 
+        tres6.setVisible(false);
+        tres7.setVisible(false);
+        tres8.setVisible(false);
+                log.setVisible(false);
+        empleado.setVisible(true);
+        Civil.setVisible(false);
+    }
     public void logaparecer() {
-        pagina.setVisible(false);
+  
         uno1.setVisible(false);
         uno2.setVisible(false);
         uno3.setVisible(false);
         uno4.setVisible(false);
         uno5.setVisible(false);
         uno6.setVisible(false);
+        uno7.setVisible(false);
         uno8.setVisible(false);
+        uno9.setVisible(false);
+        uno10.setVisible(false);
+        uno11.setVisible(false);
         dos1.setVisible(true);
         dos2.setVisible(true);
         dos3.setVisible(true);
         dos4.setVisible(true);
+        advertencia.setVisible(true);
+        textnombre.setVisible(true);
+        textcontraseña.setVisible(true);
         tres1.setVisible(false);
         tres2.setVisible(false);
         tres3.setVisible(false);
         tres4.setVisible(false);
         tres5.setVisible(false);
-        textnombre.setVisible(true);
-        textcontraseña.setVisible(true);
-        salida.setVisible(false);
+        tres6.setVisible(false);
+        tres7.setVisible(false);
+        tres8.setVisible(false);
+        log.setVisible(true);
+        empleado.setVisible(false);
+        Civil.setVisible(false);
 } 
+    
+    public void civilesaparecer(){
+    
+        
+                tres1.setVisible(true);
+        tres2.setVisible(true);
+        tres3.setVisible(true);
+        tres4.setVisible(true);
+        tres5.setVisible(true);
+        tres6.setVisible(true);
+        tres7.setVisible(true);
+        tres8.setVisible(true);
+        uno1.setVisible(false);
+        uno2.setVisible(false);
+        uno3.setVisible(false);
+        uno4.setVisible(false);
+        uno5.setVisible(false);
+        uno6.setVisible(false);
+        uno7.setVisible(false);
+        uno8.setVisible(false);
+        uno9.setVisible(false);
+        uno10.setVisible(false);
+        uno11.setVisible(false);
+         dos1.setVisible(false);
+        dos2.setVisible(false);
+        dos3.setVisible(false);
+        dos4.setVisible(false);
+        advertencia.setVisible(false);
+        textnombre.setVisible(false);
+        textcontraseña.setVisible(false);
+        log.setVisible(false);
+        empleado.setVisible(false);
+        Civil.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Civil;
@@ -612,18 +759,20 @@ public class Registro_Nacional extends javax.swing.JFrame {
     private javax.swing.JLabel dos3;
     private javax.swing.JButton dos4;
     private javax.swing.JPanel empleado;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel log;
-    private javax.swing.JTabbedPane pagina;
-    private javax.swing.JButton salida;
     private javax.swing.JPasswordField textcontraseña;
     private javax.swing.JTextField textnombre;
-    private javax.swing.JLabel tres1;
+    private javax.swing.JTabbedPane tres1;
     private javax.swing.JButton tres2;
-    private javax.swing.JTabbedPane tres3;
+    private javax.swing.JLabel tres3;
     private javax.swing.JPanel tres4;
     private javax.swing.JPanel tres5;
+    private javax.swing.JScrollPane tres6;
+    private javax.swing.JTable tres7;
+    private javax.swing.JLabel tres8;
     private javax.swing.JPanel uno1;
+    private javax.swing.JButton uno10;
+    private javax.swing.JTabbedPane uno11;
     private javax.swing.JScrollPane uno2;
     private javax.swing.JTable uno3;
     private javax.swing.JLabel uno4;
@@ -631,5 +780,6 @@ public class Registro_Nacional extends javax.swing.JFrame {
     private javax.swing.JTable uno6;
     private javax.swing.JLabel uno7;
     private javax.swing.JPanel uno8;
+    private javax.swing.JLabel uno9;
     // End of variables declaration//GEN-END:variables
 }
