@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,12 +21,22 @@ public class Registro_Nacional extends javax.swing.JFrame {
     /**
      * Creates new form Registro_Nacional
      */
-    
+    static ArrayList <Usuarios> user = new ArrayList();
     public Registro_Nacional() {
         initComponents();
         logaparecer();
+
+        DefaultTableModel t = (DefaultTableModel) uno3.getModel();
+        for (int i = 0; i < user.size(); i++) {
+            if (user.get(i) instanceof Civiles) {
+                Object[] k = {user.get(i).nombre, user.get(i).identidad, user.get(i).nacimiento};
+                t.addRow(k);
+            }
+        }
     }
-    static ArrayList <Usuarios> user = new ArrayList();
+  
+   
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -245,9 +256,8 @@ public class Registro_Nacional extends javax.swing.JFrame {
                 .addGroup(empleadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(salida, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pagina, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(24, 24, 24)
+                .addComponent(pagina, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
         );
 
         dos1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
@@ -429,7 +439,7 @@ public class Registro_Nacional extends javax.swing.JFrame {
         }
        );
         
-            
+           
             
         // Fila 3 silla 3
         while(true){
